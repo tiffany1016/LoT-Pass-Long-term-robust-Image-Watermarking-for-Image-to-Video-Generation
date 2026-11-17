@@ -20,7 +20,7 @@ diffusers==0.35.0
 easydict==1.13
 einops==0.8.1
 filelock==3.18.0
-flash_attn @ file:///public/wangguanjie/miniconda3/envs/I2V/flash_attn-2.7.4.post1%2Bcu12torch2.6cxx11abiFALSE-cp311-cp311-linux_x86_64.whl#sha256=58853b28a5a926cae14402bfd8d4d93a45ebf8f9e79533f37ab09d0d77a99c05
+
 fonttools==4.58.0
 frozenlist==1.5.0
 fsspec==2025.3.0

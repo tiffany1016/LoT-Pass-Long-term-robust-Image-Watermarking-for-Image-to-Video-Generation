@@ -39,20 +39,26 @@ def test_CogVideoX(input_image_path, out_video_path, resolution=(720,480), **arg
     pipe.enable_sequential_cpu_offload()
     save_video_path = os.path.join(out_video_path,'CogVideoX')
     os.makedirs(save_video_path, exist_ok=True)
-    filenames = os.listdir(input_image_path)
+    filenames = sorted(os.listdir(input_image_path))
     negative_prompt = "Vibrant colors, overexposed, static, blurry details, subtitles, style, artwork, painting, scene, static, overall grayish, poor quality, low quality, JPEG compression artifacts, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn faces, deformed, disfigured, deformed limbs, fused fingers, static scene, cluttered background, three legs, many people in the background, walking backward"
     with open(args['prompt'], 'r') as f:
         prompts = json.load(f)
     for filename in filenames[:args['test_num']]:
+        output_path = os.path.join(save_video_path, f"{filename.split('.')[0]}.mp4")
+        if args.get("skip_existing") and os.path.isfile(output_path):
+            continue
         image = load_image(os.path.join(input_image_path, filename))
         image = image.resize(resolution)
         prompt = prompts[filename.split('.')[0]]
+        generator = torch.Generator(device=args['device']).manual_seed(int(args['seed']))
         video = pipe(image=image, prompt=prompt, guidance_scale=args['guidance_scale'], 
                      use_dynamic_cfg=True, num_inference_steps=args['steps'],
-                     negative_prompt=negative_prompt).frames[0]
+                     negative_prompt=negative_prompt, generator=generator).frames[0]
 
-        export_to_video(video, os.path.join(save_video_path,f"{filename.split('.')[0]}.mp4")
-                        , fps=args['fps'], quality=args['quality'])
+        export_to_video(video, output_path, fps=args['fps'], quality=args['quality'])
+        on_video_complete = args.get("on_video_complete")
+        if on_video_complete is not None:
+            on_video_complete(filename, output_path)
     gc.collect()
     torch.cuda.empty_cache()
 
@@ -67,7 +73,7 @@ def test_Wan(input_image_path,out_video_path,resolution=(720,480),**args):
     pipe.enable_model_cpu_offload()
     save_video_path = os.path.join(out_video_path,'Wan')
     os.makedirs(save_video_path, exist_ok=True)
-    filenames = os.listdir(input_image_path)
+    filenames = sorted(os.listdir(input_image_path))
     generator = torch.Generator(device=args['device']).manual_seed(0)
     negative_prompt = "Vibrant colors, overexposed, static, blurry details, subtitles, style, artwork, painting, scene, static, overall grayish, poor quality, low quality, JPEG compression artifacts, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn faces, deformed, disfigured, deformed limbs, fused fingers, static scene, cluttered background, three legs, many people in the background, walking backward"
     mod_value = pipe.vae_scale_factor_spatial * pipe.transformer.config.patch_size[1]
@@ -95,7 +101,7 @@ def test_Hunyuan(input_image_path,out_video_path,resolution=(720,480),**args):
     # quantize weights to int4 with bitsandbytes
     save_video_path = os.path.join(out_video_path,'Hunyuan')
     os.makedirs(save_video_path, exist_ok=True)
-    filenames = os.listdir(input_image_path)
+    filenames = sorted(os.listdir(input_image_path))
     model_id = "hunyuanvideo-community/HunyuanVideo-I2V"
     transformer = HunyuanVideoTransformer3DModel.from_pretrained(
         model_id, subfolder="transformer", torch_dtype=torch.bfloat16
@@ -111,19 +117,41 @@ def test_Hunyuan(input_image_path,out_video_path,resolution=(720,480),**args):
 
     mod_value = pipeline.vae_scale_factor_spatial * pipeline.transformer.config.patch_size
     max_area = resolution[0] * resolution[1]
+    
+    with open(args['prompt'], 'r') as f:
+        prompts = json.load(f)
+    
     for filename in filenames[:args['test_num']]:
         image = load_image(os.path.join(input_image_path, filename))
+    
         aspect_ratio = image.height / image.width
         height = round(np.sqrt(max_area * aspect_ratio)) // mod_value * mod_value
         width = round(np.sqrt(max_area / aspect_ratio)) // mod_value * mod_value
-        image = image.resize(resolution)
-        prompt = args['prompt']
-        video = pipeline(image=image, prompt=prompt, guidance_scale=args['guidance_scale'], num_frames=49,
-                      num_inference_steps=args['steps'], height=height, width=width,
-                      negative_prompt=negative_prompt).frames[0]
-
-        export_to_video(video, os.path.join(save_video_path,f"{filename.split('.')[0]}.mp4")
-                        , fps=args['fps'], quality=args['quality'])
+    
+        # PIL resize uses (width, height)
+        image = image.resize((width, height))
+    
+        key = os.path.splitext(filename)[0]
+        prompt = prompts[key]
+    
+        video = pipeline(
+            image=image,
+            prompt=prompt,
+            guidance_scale=args['guidance_scale'],
+            num_frames=49,
+            num_inference_steps=args['steps'],
+            height=height,
+            width=width,
+            negative_prompt=negative_prompt
+        ).frames[0]
+    
+        export_to_video(
+            video,
+            os.path.join(save_video_path, f"{key}.mp4"),
+            fps=args['fps'],
+            quality=args['quality']
+        )
+    
     gc.collect()
     torch.cuda.empty_cache()
 
@@ -137,7 +165,7 @@ def test_I2VGen(input_image_path,out_video_path,resolution=(720,480),**args):
     pipe.enable_model_cpu_offload()
     save_video_path = os.path.join(out_video_path,'I2VGen')
     os.makedirs(save_video_path, exist_ok=True)
-    filenames = os.listdir(input_image_path)
+    filenames = sorted(os.listdir(input_image_path))
     mod_value = pipe.vae_scale_factor
     max_area = resolution[0] * resolution[1]
     negative_prompt = "Vibrant colors, overexposed, static, blurry details, subtitles, style, artwork, painting, scene, static, overall grayish, poor quality, low quality, JPEG compression artifacts, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn faces, deformed, disfigured, deformed limbs, fused fingers, static scene, cluttered background, three legs, many people in the background, walking backward"
@@ -166,7 +194,7 @@ def test_SVD(input_image_path,out_video_path,resolution=(720,480),**args):
     pipe.enable_model_cpu_offload()
     save_video_path = os.path.join(out_video_path,'SVD')
     os.makedirs(save_video_path, exist_ok=True)
-    filenames = os.listdir(input_image_path)
+    filenames = sorted(os.listdir(input_image_path))
     generator = torch.Generator(device=args['device']).manual_seed(0)
     mod_value = pipe.vae_scale_factor
     max_area = resolution[0] * resolution[1]

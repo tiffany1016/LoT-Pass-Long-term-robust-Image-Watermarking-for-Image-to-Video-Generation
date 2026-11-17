@@ -75,7 +75,8 @@ class GetImageI2V(Dataset):
     
     def pull_item(self , index):
         bg_id = self.bg_ids[index]
-        bg = Image.open(self.bg_path%bg_id)
+        # bg = Image.open(self.bg_path%bg_id)
+        bg = Image.open(self.bg_path % bg_id).convert("RGB")
         bg = self.trans(bg)
         # bg = bg * 2. - 1.
         return bg, bg_id

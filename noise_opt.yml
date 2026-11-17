@@ -73,7 +73,11 @@ noise:
   #
   Grayscale:
     p: 1.0
-
+  #
+  Superposition:
+    si_pool: []
+    shuffle: false
+    
   #
   All:  
     names: ['Identity','Quant','GaussianBlur','Salt_Pepper','GaussianNoise','Resize','Jpeg','Dropout','Cropout','RealCrop','Crop','Brightness','Contrast','Saturation','Hue','Rotation','Affine','Flip','Grayscale']

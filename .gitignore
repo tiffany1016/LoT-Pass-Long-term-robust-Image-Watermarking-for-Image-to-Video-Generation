@@ -1,0 +1,12 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Model checkpoints
+checkpoints/
+
+# Datasets
+data/
+
+# Experiment outputs (optional)
+Validation_Results/

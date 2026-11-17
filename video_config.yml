@@ -49,7 +49,7 @@ model:
     fps: 8
     quality: 10
   Choice:
-    names: ['CogVideoX', 'Wan', 'Hunyuan', 'SVD']
+    # names: ['CogVideoX', 'Wan', 'Hunyuan', 'SVD']
     # names: ['CogVideoX', 'Wan', 'Hunyuan']
     # names: ['CogVideoX', 'Wan']
     # names: ['CogVideoX', 'SVD']
@@ -57,3 +57,4 @@ model:
     # names: ['SVD']
     # names: ['Wan']
     # names: ['Hunyuan']
+    names: ['CogVideoX']

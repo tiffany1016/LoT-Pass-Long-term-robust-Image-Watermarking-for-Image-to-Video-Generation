@@ -143,7 +143,7 @@ def decode_Videos(datapath, save_path, device, **args):
     file_path  = Path(message_map['ckpt'].item())
     dir_path = file_path.parent
     parent_dir = dir_path.parent
-    with open(os.path.join(parent_dir,"train_param.json"), 'r') as f:
+    with open(os.path.join(dir_path,"train_param.json"), 'r') as f:
         param_dict = json.load(f) 
     params = TrainParam(**param_dict)
     decoder = convnext.ConvNextDecoder(params)
@@ -152,7 +152,7 @@ def decode_Videos(datapath, save_path, device, **args):
     decoder.eval()
     decoder.to(device)
     del ckpt
-    sd_vae = load_VAE(device)
+    sd_vae = None if args.get('skip_vae_metric', False) else load_VAE(device)
     trans = transforms.Compose([
             transforms.ToTensor(),
             transforms.Resize((args['input_res'],args['input_res'])),
@@ -160,11 +160,13 @@ def decode_Videos(datapath, save_path, device, **args):
     ]) 
     logger, log_path = setup_logger(datapath, "decode")
     logger.info(message_map['ckpt'].item())
-    filenames = os.listdir(os.path.join(datapath, "Videos"))
+    filenames = sorted(os.listdir(os.path.join(datapath, "Videos")))
 
     acc_dict = {}
     for filename in filenames:
-        video_names = os.listdir(os.path.join(datapath, "Videos", filename))
+        video_names = sorted(
+            path.name for path in Path(datapath, "Videos", filename).glob("*.mp4")
+        )
         avg_method_acc = 0.0
         all_acc = []
         for video_name in video_names:
@@ -181,13 +183,17 @@ def decode_Videos(datapath, save_path, device, **args):
                 all_msg_bits.append(decoded_tensor.detach().cpu().numpy().round().clip(0, 1))
                 avg_Acc.append(calculate_acc(message, decoded_tensor))
             # print(f"{filename} {video_name} : Acc: {sum(avg_Acc)/len(video)}    First Ten Frame {avg_Acc[:10]}   Flicker Index: {calculate_flicker_index(video)}")
+            sd_vae_similarity = (
+                "skipped" if sd_vae is None else calculate_SDVAE_Cosine_Similarity(video, device, sd_vae)
+            )
             logger.info(f"{filename} {video_name} : Acc: {sum(avg_Acc)/len(video)}  Soft Vot Acc {calculate_acc(message,soft_vote(all_msg_t))} Hard Vot Acc {calculate_acc(message,torch.from_numpy(hard_vote(all_msg_bits)))}  First Ten Frame {avg_Acc[:10]}  " \
                           f"Flicker Index: {calculate_flicker_index(video)}  " \
-                            f" SDVAE Cosine Similarity: {calculate_SDVAE_Cosine_Similarity(video, device, sd_vae)}   Wrapper Cosine Similarity: {calculate_Clip_Cosine_Similarity(video)}")
+                            f" SDVAE Cosine Similarity: {sd_vae_similarity}   Wrapper Cosine Similarity: {calculate_Clip_Cosine_Similarity(video)}")
             avg_method_acc += sum(avg_Acc)/len(video)
             all_acc.append(avg_Acc)
         logger.info(f"{filename}  : Acc: {avg_method_acc/len(video_names)} ")
         acc_dict[filename] = np.array(all_acc)
+        acc_dict[f"{filename}_filenames"] = np.array(video_names)   
     np.savez(os.path.join(datapath,"video_acc_map.npz"), **acc_dict)
 
 @torch.no_grad
@@ -237,7 +243,7 @@ def decode_Videos_opticflow(datapath, save_path, device, **args):
     file_path  = Path(message_map['ckpt'].item())
     dir_path = file_path.parent
     parent_dir = dir_path.parent
-    with open(os.path.join(parent_dir,"train_param.json"), 'r') as f:
+    with open(os.path.join(dir_path,"train_param.json"), 'r') as f:
         param_dict = json.load(f) 
     params = TrainParam(**param_dict)
     decoder = convnext.ConvNextDecoder(params)
@@ -246,7 +252,7 @@ def decode_Videos_opticflow(datapath, save_path, device, **args):
     decoder.eval()
     decoder.to(device)
     del ckpt
-    sd_vae = load_VAE(device)
+    sd_vae = None if args.get('skip_vae_metric', False) else load_VAE(device)
     trans = transforms.Compose([
             transforms.ToTensor(),
             transforms.Resize((args['input_res'],args['input_res'])),
@@ -254,11 +260,13 @@ def decode_Videos_opticflow(datapath, save_path, device, **args):
     ]) 
     logger, log_path = setup_logger(datapath, "decode_optical")
     logger.info(message_map['ckpt'].item())
-    filenames = os.listdir(os.path.join(datapath, "Videos"))
+    filenames = sorted(os.listdir(os.path.join(datapath, "Videos")))
     os.makedirs(os.path.join(datapath, "Aligned"), exist_ok=True)
     acc_dict = {}
     for filename in filenames:
-        video_names = os.listdir(os.path.join(datapath, "Videos", filename))
+        video_names = sorted(
+            path.name for path in Path(datapath, "Videos", filename).glob("*.mp4")
+        )
         avg_method_acc = 0.0
         avg_method_acc_vote = 0.0
         all_acc = []
@@ -287,14 +295,18 @@ def decode_Videos_opticflow(datapath, save_path, device, **args):
                 all_msg_t.append(decoded_tensor)
                 all_msg_bits.append(decoded_tensor.detach().cpu().numpy().round().clip(0, 1))
                 avg_Acc.append(calculate_acc(message, decoded_tensor))
+            sd_vae_similarity = (
+                "skipped" if sd_vae is None else calculate_SDVAE_Cosine_Similarity(video, device, sd_vae)
+            )
             logger.info(f"{filename} {video_name} : Acc: {sum(avg_Acc)/len(video)}  Soft Vot Acc {calculate_acc(message,soft_vote(all_msg_t))} Hard Vot Acc {calculate_acc(message,torch.from_numpy(hard_vote(all_msg_bits)))}  First Ten Frame {avg_Acc[:10]}  " \
                           f"Flicker Index: {calculate_flicker_index(video)}  " \
-                            f" SDVAE Cosine Similarity: {calculate_SDVAE_Cosine_Similarity(video, device, sd_vae)}   Wrapper Cosine Similarity: {calculate_Clip_Cosine_Similarity(video)}")
+                            f" SDVAE Cosine Similarity: {sd_vae_similarity}   Wrapper Cosine Similarity: {calculate_Clip_Cosine_Similarity(video)}")
             avg_method_acc += sum(avg_Acc)/len(video)
             avg_method_acc_vote += calculate_acc(message,torch.from_numpy(hard_vote(all_msg_bits)))
             all_acc.append(avg_Acc)
         logger.info(f"{filename}  : Acc: {avg_method_acc/len(video_names)} Vote Acc: {avg_method_acc_vote/len(video_names)} ")
         acc_dict[filename] = np.array(all_acc)
+        acc_dict[f"{filename}_filenames"] = np.array(video_names)
     np.savez(os.path.join(datapath,"video_acc_map_optical.npz"), **acc_dict)
 
 
@@ -339,7 +351,8 @@ if __name__=="__main__":
                  out_video_path=os.path.join(args.datapath,"Videos"),
                  resolution=resolution, guidance_scale=setting['guidance_scale'],
                  steps=setting['inference_steps'], fps=setting['fps'], 
-                 quality=setting['quality'], test_num = args.test_num, device=device, prompt="data/video_prompts.json")
+                 quality=setting['quality'], test_num = args.test_num, device=device,
+                 seed=args.seed, prompt="data/video_prompts.json")
 
     elif args.mode == 'decode':
         save_path = None
