@@ -1,0 +1,307 @@
+{
+  "study": "VBench++ I2V x LoT-Pass camera-motion pilot",
+  "selection_seed": 42,
+  "selection_method": "Python random.Random(42).sample over lexically sorted eligible filenames, stratified by category",
+  "requested_category_quota": {
+    "architecture": 3,
+    "indoor": 3,
+    "scenery": 3,
+    "abstract": 1
+  },
+  "actual_category_distribution": {
+    "architecture": 3,
+    "indoor": 3,
+    "scenery": 3,
+    "abstract": 1
+  },
+  "fallback": {
+    "fallback_used": false,
+    "fallback_assignments": []
+  },
+  "source_counts": {
+    "full_info_records": 1118,
+    "camera_motion_records": 763,
+    "camera_motion_images": 109,
+    "eligible_images": 109,
+    "source_metadata_images": 355,
+    "unknown_suffixes": [],
+    "duplicate_records": [],
+    "rejected_images": []
+  },
+  "metadata_sha256": {
+    "vbench2_i2v_full_info.json": "8cf4d34dc11779a336c216a1a71d482927cfa24a1bf736ab5c92425609f129f8",
+    "i2v-bench-info.json": "7dbe47684eadb2b4ace3fe452a4d8e8ceffa9c788d9c1ff048af3bb2585f96bf"
+  },
+  "git_commit": "37d5dcd58b5ec961f405ac860afa2e073eab4fc3",
+  "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "preprocessing": {
+    "official_crop_variant": "8-5",
+    "policy": "Center-crop official 8:5 crop to 3:2, then resize to 720x480 with Pillow LANCZOS; no stretching or padding.",
+    "target_size_width_height": [
+      720,
+      480
+    ],
+    "implementation": "Pillow 13.0.0"
+  },
+  "selected_images": [
+    {
+      "image_id": "VB001",
+      "selected_index": 1,
+      "image_name": "a city street at night during a snow storm.jpg",
+      "image_type": "architecture",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a city street at night during a snow storm.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a city street at night during a snow storm.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB001.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/street-lights-turned-on-near-buildings-at-night-2385898",
+      "original_sha256": "06ce8277aaa5fa3125e31100d801e9aaf307e08052151434bba7711089f6bdfc",
+      "official_crop_sha256": "c109a008c658d49e3a2ab17977ef549f27806a847b291363b6643e221aa7ef29",
+      "canonical_sha256": "35d0493e97c83e2e57ab89791243d130b4c28ab5f700c4b0184e6bae5000d9cd",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          114,
+          0,
+          3420,
+          2280
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB002",
+      "selected_index": 2,
+      "image_name": "a beach with a lot of buildings on the side of a cliff.jpg",
+      "image_type": "architecture",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a beach with a lot of buildings on the side of a cliff.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a beach with a lot of buildings on the side of a cliff.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB002.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/colorful-cliffside-village-3225528",
+      "original_sha256": "a9f9d7eca3f108d254fec1e7569b78640636e94cf462f7540f474ba4b4c5c40a",
+      "official_crop_sha256": "49d864e35cf4b37b0561a42918a3960211fd3b390512d7fe7031efd34052e9bc",
+      "canonical_sha256": "2b5fad0417a4ac73f093dd0f29d87b25b812c0cebf746838db31142ed96261c0",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          152,
+          0,
+          4575,
+          3050
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB003",
+      "selected_index": 3,
+      "image_name": "a pile of wood sitting next to a log house.jpg",
+      "image_type": "architecture",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a pile of wood sitting next to a log house.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a pile of wood sitting next to a log house.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB003.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/brown-logs-on-grass-field-358532",
+      "original_sha256": "9bd5c608b5bc5e99fa1901ff5b7d0751af15789e6e50c9d0f92a672f26d178e9",
+      "official_crop_sha256": "a78dc684dc45548761df226915e89cfee91211cf5bf658dee53fe5da2a846b76",
+      "canonical_sha256": "874dfd2ebb3dc244bff3482cde16e816ba5e9e647d75c34b1c7060756a6b4afe",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          135,
+          0,
+          4057,
+          2705
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB004",
+      "selected_index": 4,
+      "image_name": "a living room with a couch, table, and a window.jpg",
+      "image_type": "indoor",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a living room with a couch, table, and a window.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a living room with a couch, table, and a window.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB004.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/sofa-chair-beside-window-2249055",
+      "original_sha256": "fdeabef25528944b6adf8c06f656155ca3c77596653e962441207e602436190a",
+      "official_crop_sha256": "ac7a55170888e4710e741b5e5da9c9cc35bb5aefca8a0e1b5fbc72111565a6a7",
+      "canonical_sha256": "4eda79ef45160ce82b3908d2a142c64a577ddc54690e62aaa394b747941d8fc4",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          96,
+          0,
+          2872,
+          1915
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB005",
+      "selected_index": 5,
+      "image_name": "an outdoor dining area surrounded by plants and a brick walkway.jpg",
+      "image_type": "indoor",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/an outdoor dining area surrounded by plants and a brick walkway.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/an outdoor dining area surrounded by plants and a brick walkway.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB005.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/patio-table-and-chair-set-on-a-garden-2565222",
+      "original_sha256": "8f5c25e0f2477ff6d4521dba87ca54e694e0fe255261f890fa6f4a655c0486f3",
+      "official_crop_sha256": "0a4892cfe0df7c358148bff0b6c5ec82346fbfdf8f0f98688b55f93e13688163",
+      "canonical_sha256": "27fb995bf373d850c9673f345d34c55e7bebe855bc626070168ffc8729719614",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          108,
+          0,
+          3240,
+          2160
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB006",
+      "selected_index": 6,
+      "image_name": "a living room filled with furniture next to a stone wall.jpg",
+      "image_type": "indoor",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a living room filled with furniture next to a stone wall.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a living room filled with furniture next to a stone wall.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB006.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/brown-leather-sofa-placed-near-wall-312029",
+      "original_sha256": "6460c8574be0e1fc0086fa4a97a97c3127e42f9cc0fe810c155453d0077ae18c",
+      "official_crop_sha256": "60189247c685d344081e261b84756897e36c0e5a3a18737ae2a6b60b3001f2bf",
+      "canonical_sha256": "2890742b1ccee782f8366c0cdac12e0b9b9aa4c4ad7dadc9a7ba79f788ef3075",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          86,
+          0,
+          2587,
+          1725
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB007",
+      "selected_index": 7,
+      "image_name": "a foggy field that has trees in the grass.jpg",
+      "image_type": "scenery",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a foggy field that has trees in the grass.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a foggy field that has trees in the grass.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB007.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/silhouette-of-forest-with-fogs-458983",
+      "original_sha256": "53352da8a75d01ca19e13d55d3095dbedbd113709298db7fab7d8c7a66dafe4c",
+      "official_crop_sha256": "7816baba05cfca524024d323244eb74119f8d236af69807d3398a9fce75a8812",
+      "canonical_sha256": "74de959620e779272a1ebbd68e397b56b0e792e9e0b72deeb2b72c3afe00594a",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          169,
+          0,
+          5062,
+          3375
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB008",
+      "selected_index": 8,
+      "image_name": "several hot air balloons flying over a city.jpg",
+      "image_type": "scenery",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/several hot air balloons flying over a city.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/several hot air balloons flying over a city.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB008.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/hot-air-balloons-flying-over-city-3789147",
+      "original_sha256": "b837575c6def32ce983846dd84444e3b613a42a601711da1ba5019d3c909fbeb",
+      "official_crop_sha256": "64ef3a74fce66dbc645fc0cff0893baf4e985ccb3898b78d9aa366dbeb77876b",
+      "canonical_sha256": "54cd36f7ed14ad2c3a03f31c4f80f0b6cc47d9fc7369678fc141bd9904d3eeee",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          175,
+          0,
+          5265,
+          3510
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB009",
+      "selected_index": 9,
+      "image_name": "a flock of birds flying over a tree at sunset.jpg",
+      "image_type": "scenery",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a flock of birds flying over a tree at sunset.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a flock of birds flying over a tree at sunset.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB009.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/flock-of-birds-flying-over-bare-tree-overlooking-sunset-36744",
+      "original_sha256": "3ec0195c40f5a3571c3f51ffb142a46d0933b39d02566932cfb3e5e8ae87dfec",
+      "official_crop_sha256": "54e457950bd362c9eebd1e74c4a980832f94f4e068895c6da25046881aec8ea1",
+      "canonical_sha256": "87ce382623686e7ffc133d52ce2f610420f3e24b419a0d27c599c7e13790a1c5",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          133,
+          0,
+          4005,
+          2670
+        ],
+        "axis": "horizontal"
+      }
+    },
+    {
+      "image_id": "VB010",
+      "selected_index": 10,
+      "image_name": "a view of a star trail in the night sky.jpg",
+      "image_type": "abstract",
+      "official_image_path": "vbench_lotpass_pilot/images/official/original/a view of a star trail in the night sky.jpg",
+      "official_crop_path": "vbench_lotpass_pilot/images/official/crop_8-5/a view of a star trail in the night sky.jpg",
+      "canonical_image_path": "vbench_lotpass_pilot/images/canonical_clean/VB010.png",
+      "source": "VBench++ official I2V image suite",
+      "selection_seed": 42,
+      "source_url": "www.pexels.com/photo/time-lapse-photo-of-stars-on-night-924824",
+      "original_sha256": "bee7748daa38eaa7be5d4d7a099a47a777302d2c99f71103e6fd38d26705f0a6",
+      "official_crop_sha256": "cfd0fba2bb007d3c0b6d83c78db33884dfae7da1954911593ff5e2b49c0a93d4",
+      "canonical_sha256": "bf4e518cc692aa00a5fd370aab575055da0849e7befb4194c50edf027fb060b1",
+      "crop_variant": "8-5",
+      "crop_transform": {
+        "crop_box_xywh": [
+          173,
+          0,
+          5182,
+          3455
+        ],
+        "axis": "horizontal"
+      }
+    }
+  ],
+  "motion_counts": {
+    "static": 10,
+    "pan_left": 5,
+    "tilt_up": 5,
+    "zoom_in": 5,
+    "pan_right": 5,
+    "tilt_down": 5,
+    "zoom_out": 5
+  }
+}

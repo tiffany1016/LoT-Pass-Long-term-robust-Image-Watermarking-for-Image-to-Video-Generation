@@ -1,0 +1,8 @@
+{
+  "approved": true,
+  "approval_text": "you can start the rest of the experiment",
+  "selection_manifest": "selection/selection_manifest.json",
+  "selection_manifest_sha256": "7644474072e17a69dc4aa6e6ce8a2f5bec73aee0e5eb5f4468e8b286f43b1709",
+  "approved_at_local": "2026-11-17T19:00:12+08:00",
+  "approval_scope": "Stage B of the VBench++ LoT-Pass pilot, using the exact Stage A selection bound to this hash."
+}
