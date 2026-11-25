@@ -1,0 +1,5 @@
+condition,scheduled,completed,valid_motion_videos,generation_success_fraction,mean_ba_frames_1_48,last_third_mean_ba,mean_within_image_delta_ba_to_static,mean_srr,median_srr,mean_lsrr,last_third_ba_below_0_80_rate,static_minus_motion_over_0_15_rate,realized_motion_subset_n,realized_motion_failure_rate,motion_label_status
+static,10,10,0,1.0,0.9155598958333334,0.872265625,0.0,0.17093209876543208,0.10541666666666666,0.11384104938271604,0.3,nan,0,nan,not reviewed; realized-motion subset unavailable
+pan,10,10,0,1.0,0.8141276041666667,0.69296875,0.10143229166666667,0.13040123456790123,0.0867361111111111,0.08053858024691359,0.8,0.5,0,nan,not reviewed; realized-motion subset unavailable
+tilt,10,10,0,1.0,0.7910807291666666,0.6900390625,0.12447916666666667,0.12222685185185185,0.04373456790123456,0.06839197530864197,0.6,0.4,0,nan,not reviewed; realized-motion subset unavailable
+zoom,10,10,0,1.0,0.78671875,0.6669921875,0.12884114583333334,0.1216141975308642,0.05925154320987655,0.08084567901234567,0.8,0.7,0,nan,not reviewed; realized-motion subset unavailable

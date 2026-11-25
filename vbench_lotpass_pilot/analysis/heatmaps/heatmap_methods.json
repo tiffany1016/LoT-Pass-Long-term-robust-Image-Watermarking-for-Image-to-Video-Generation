@@ -1,0 +1,8 @@
+{
+  "encoder": "Existing encoder_heatmap.py residual magnitude sqrt(mean((watermarked-clean)^2 over RGB)); raw magnitude map saved before display normalization.",
+  "decoder": "Existing gradient_saliency.compute_saliency; mean ground-truth signed bit score; absolute input gradient averaged over RGB.",
+  "decoder_frame_rule": "Every frame in each completed generated video; no temporal interpolation of attribution maps.",
+  "display_alpha": 0.35,
+  "selection_manifest_sha256": "7644474072e17a69dc4aa6e6ce8a2f5bec73aee0e5eb5f4468e8b286f43b1709",
+  "normalization": "Raw numeric magnitudes are separate from percentile-normalized display maps."
+}

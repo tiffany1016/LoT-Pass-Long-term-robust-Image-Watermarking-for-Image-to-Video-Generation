@@ -1,0 +1,19 @@
+{
+  "python": "3.12.3",
+  "environment_manager": "uv 0.13.1",
+  "environment_path": "vbench_lotpass_pilot/.venv",
+  "torch": "2.6.0+cu124",
+  "torchvision": "0.21.0+cu124",
+  "diffusers": "0.35.0",
+  "transformers": "4.51.3",
+  "numpy": "1.26.4",
+  "scikit_image": "0.25.2",
+  "stage_a_image_library": "Pillow 13.0.0",
+  "pillow_wheel_sha256": "42d63be3af4f9b951b199b0a9d23365d37ab14687e6d77b74940432c8515c4ca",
+  "stage_a_gpu_work_performed": false,
+  "torch_cuda_runtime": "12.4",
+  "gpu_model": "NVIDIA GeForce RTX 3090",
+  "gpu_physical_index": 0,
+  "torch_cuda_environment": "Stage B uses CUDA_VISIBLE_DEVICES=0",
+  "project_commit": "37d5dcd58b5ec961f405ac860afa2e073eab4fc3"
+}

@@ -1,0 +1,17 @@
+{
+  "n_source_pairs": 16,
+  "completed_pairs": 16,
+  "mean_paired_delta_mean_ba": -0.08290816326530612,
+  "median_paired_delta_mean_ba": -0.05165816326530609,
+  "transition_lower_pair_count": 16,
+  "generation_status_counts": {
+    "missing": 0
+  },
+  "decode_status_counts": {
+    "completed": 32
+  },
+  "manual_transition_statuses": [
+    "pending_manual_visual_review"
+  ],
+  "optical_flow_alignment": false
+}

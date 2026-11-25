@@ -1,0 +1,7 @@
+x,y,n_images,pearson_r,pearson_p,spearman_rho,spearman_p,unit
+estimated_dynamic_coverage,mean_raw_ba,15,-0.43044003149366006,0.10924234330903455,-0.46374235235801764,0.08165509116504893,source-image means across both prompt conditions
+estimated_dynamic_coverage,mean_aligned_ba,15,-0.36608451622642757,0.17959998082045403,-0.5174576827469772,0.048206823730769455,source-image means across both prompt conditions
+estimated_dynamic_coverage,stable_region_ratio,15,-0.5342882568069065,0.04019688539653508,-0.47406158144328886,0.0742218473810748,source-image means across both prompt conditions
+estimated_dynamic_coverage,largest_stable_region_ratio,15,-0.507925955535,0.05323420451554005,-0.4955285209803435,0.06033493359216724,source-image means across both prompt conditions
+estimated_dynamic_coverage,decoder_stable_overlap,15,-0.32139661817046894,0.24276854923512128,-0.3184262697996431,0.24739749375293124,source-image means across both prompt conditions
+estimated_dynamic_coverage,encoder_stable_overlap,15,-0.5216171490533775,0.04612637494514738,-0.5456180465668041,0.035393028332777826,source-image means across both prompt conditions

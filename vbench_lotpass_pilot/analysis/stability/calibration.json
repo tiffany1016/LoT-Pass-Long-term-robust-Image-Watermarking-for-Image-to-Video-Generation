@@ -1,0 +1,32 @@
+{
+  "status": "completed; thresholds frozen before examining BA",
+  "calibration_cases": [
+    "VB001_static",
+    "VB004_static",
+    "VB007_static",
+    "VB010_static"
+  ],
+  "calibration_frame_indices": [
+    1,
+    24,
+    48
+  ],
+  "sample_count": 12,
+  "initial_thresholds": {
+    "mae": 0.05,
+    "ssim": 0.9
+  },
+  "initial_median_stable_fraction": 0.1074074074074074,
+  "candidate_grid_results": [],
+  "chosen_thresholds": {
+    "mae": 0.05,
+    "ssim": 0.9
+  },
+  "selection_rule": "Retain defaults unless median SRR on the predeclared static calibration set is <=1% or >=95%; if degenerate, choose grid pair with median SRR nearest 10% (low case) or 90% (high case), independent of BA.",
+  "selection_manifest_sha256": "7644474072e17a69dc4aa6e6ce8a2f5bec73aee0e5eb5f4468e8b286f43b1709",
+  "computed_at": "2026-11-18T00:49:55.382040+00:00",
+  "patch_size": 16,
+  "ssim_window": 7,
+  "ssim_window_type": "uniform 7x7 valid windows, averaged within each 16x16 patch and over RGB",
+  "ssim_data_range": 1.0
+}

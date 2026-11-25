@@ -1,0 +1,14 @@
+{
+  "method": "repository utils.utils.TorchvisionRAFT.compute_flow",
+  "reference_frame": 0,
+  "target_frames": [
+    12,
+    24,
+    36,
+    48
+  ],
+  "alignment_or_warping": false,
+  "video_modified": false,
+  "motion_status_labels": "not_reviewed; RAFT numbers do not automatically validate prompts",
+  "selection_manifest_sha256": "7644474072e17a69dc4aa6e6ce8a2f5bec73aee0e5eb5f4468e8b286f43b1709"
+}

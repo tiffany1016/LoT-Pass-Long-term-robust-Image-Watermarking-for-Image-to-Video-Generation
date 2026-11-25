@@ -10,3 +10,12 @@ data/
 
 # Experiment outputs (optional)
 Validation_Results/
+
+# Generated dashboards with embedded videos
+/claw_lotpass_dashboard.html
+/chronomagic150_dashboard.html
+/tcbench_lotpass_dashboard.html
+/vbench_lotpass_pilot_dashboard.html
+
+# Local dashboard example
+/html_example.html

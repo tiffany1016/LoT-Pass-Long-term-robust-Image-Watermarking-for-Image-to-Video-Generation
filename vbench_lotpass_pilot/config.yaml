@@ -1,0 +1,27 @@
+selection_seed: 42
+generation_seed: 42
+scene_quota:
+  architecture: 3
+  indoor: 3
+  scenery: 3
+  abstract: 1
+motions_per_image: [static, pan, tilt, zoom]
+generator: CogVideoX-I2V
+frames: 49
+fps: 8
+width: 720
+height: 480
+patch_size: 16
+mae_stable_threshold: 0.05
+ssim_stable_threshold: 0.90
+similarity_mae_scale: 0.15
+overlay_alpha: 0.35
+heatmap_all_frames: true
+optical_flow_alignment: false
+supplemental_raft_alignment: true
+temporal_stability: false
+stage_b_status: approved
+stability_calibration:
+  cases: [VB001_static, VB004_static, VB007_static, VB010_static]
+  frame_indices: [1, 24, 48]
+  inspect_ba: false

@@ -1,0 +1,14 @@
+{
+  "selection_manifest_sha256": "7644474072e17a69dc4aa6e6ce8a2f5bec73aee0e5eb5f4468e8b286f43b1709",
+  "checkpoint": "checkpoints/model-99.pth",
+  "checkpoint_sha256": "737f93beceb26c038c590b32c66691bc16538bb25cd3bb9250ad48783e5ba574",
+  "raw_frames_only": true,
+  "optical_flow_alignment": false,
+  "copy_like_rule": {
+    "frame": 0,
+    "mean_rgb_mae_div_255_lt": 0.00392156862745098,
+    "ssim_gt": 0.999
+  },
+  "n_cases_with_raw_decode": 10,
+  "n_per_frame_rows": 1960
+}

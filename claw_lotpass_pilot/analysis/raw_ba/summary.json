@@ -1,0 +1,21 @@
+{
+  "generation_manifest_sha256": "21eac2688ede368c1e1b325a0058a5ad60b383c4a6617d93ae3ac6b9dd693455",
+  "checkpoint_sha256": "737f93beceb26c038c590b32c66691bc16538bb25cd3bb9250ad48783e5ba574",
+  "decoded_case_count": 30,
+  "frame_row_count": 1470,
+  "condition_means_excluding_copy_frame": {
+    "static_control": {
+      "video_count": 15,
+      "mean_ba": 0.9186224489795919
+    },
+    "broad_fluid_motion": {
+      "video_count": 15,
+      "mean_ba": 0.9241496598639457
+    }
+  },
+  "copy_frame_rule": {
+    "frame_index": 0,
+    "rgb_mae_div_255_lt": 0.00392156862745098,
+    "ssim_gt": 0.999
+  }
+}

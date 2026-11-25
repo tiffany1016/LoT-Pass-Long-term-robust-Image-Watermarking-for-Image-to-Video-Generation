@@ -1,0 +1,9 @@
+{
+  "encoder": "Existing encoder_heatmap.py residual magnitude sqrt(mean((watermarked-clean)^2 over RGB)); raw magnitude maps retained.",
+  "decoder": "Existing gradient_saliency.compute_saliency; target is mean ground-truth signed bit score; absolute input gradient averaged over RGB.",
+  "decoder_frame_rule": "Every frame of each completed generated video; no temporal interpolation of attribution maps.",
+  "display_alpha": 0.35,
+  "overlap": "sum(raw_map * stable_mask) / sum(raw_map); NA when map sum <= 1e-12",
+  "enrichment": "overlap / stable_region_ratio; NA when stable_region_ratio <= 1e-12",
+  "raw_maps_saved": true
+}

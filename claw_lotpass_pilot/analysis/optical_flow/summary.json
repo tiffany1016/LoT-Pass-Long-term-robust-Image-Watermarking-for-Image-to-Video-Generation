@@ -1,0 +1,19 @@
+{
+  "completed_videos": 30,
+  "condition_summary": {
+    "static_control": {
+      "video_count": 15,
+      "raw_mean_ba_excluding_copy_frame": 0.9186224489795919,
+      "aligned_mean_ba_excluding_copy_frame": 0.9290391156462584,
+      "mean_alignment_delta": 0.010416666666666652
+    },
+    "broad_fluid_motion": {
+      "video_count": 15,
+      "raw_mean_ba_excluding_copy_frame": 0.9241496598639457,
+      "aligned_mean_ba_excluding_copy_frame": 0.9325680272108844,
+      "mean_alignment_delta": 0.008418367346938793
+    }
+  },
+  "method": "Existing LoT-Pass RAFT implementation; reference is generated frame 0; target warped to reference.",
+  "heatmap_frames_per_video": "all frames"
+}

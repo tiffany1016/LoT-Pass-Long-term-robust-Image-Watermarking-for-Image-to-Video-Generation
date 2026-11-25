@@ -63,7 +63,7 @@ class GetImageI2V(Dataset):
         self.bg_path = p.join(root,"%s.png")
         self.root = root
         self.bg_ids = []
-        for file in os.listdir(root):
+        for file in sorted(os.listdir(root)):
             self.bg_ids.append(file.split(".")[0])
     
     def __getitem__(self, index):

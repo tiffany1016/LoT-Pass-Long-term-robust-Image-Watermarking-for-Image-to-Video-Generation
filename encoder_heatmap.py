@@ -28,14 +28,17 @@ def load_rgb(path: Path) -> np.ndarray:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pair", action="append", default=[], metavar="SOURCE_DIR=ENCODED_DIR",
-                        help="Override/add an input pair; encoded images must have matching filenames")
+                        help="Use explicit input pairs; encoded images must have matching filenames")
+    parser.add_argument("--out-dir", type=Path, default=OUT,
+                        help="Directory for plots, statistics, and raw residual-magnitude arrays")
     args = parser.parse_args()
-    pairs = dict(DEFAULT_PAIRS)
+    out_dir = args.out_dir.resolve()
+    pairs = {} if args.pair else dict(DEFAULT_PAIRS)
     for pair in args.pair:
         source, encoded = pair.split("=", 1)
         pairs[Path(source).resolve()] = Path(encoded).resolve()
 
-    OUT.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     rows, missing = [], []
     energy_by_band = {name: [] for name in ("low", "medium", "high")}
     for source_dir, encoded_dir in pairs.items():
@@ -73,20 +76,23 @@ def main() -> None:
                     values[band] = value
                     if np.isfinite(value):
                         energy_by_band[band].append(value)
-                out_dir = OUT / source_dir.name
-                out_dir.mkdir(parents=True, exist_ok=True)
+                image_out_dir = out_dir / source_dir.name
+                image_out_dir.mkdir(parents=True, exist_ok=True)
+                raw_dir = out_dir / "raw_maps" / source_dir.name
+                raw_dir.mkdir(parents=True, exist_ok=True)
                 heat = np.sqrt(residual_energy)
+                np.save(raw_dir / f"{watermarked_path.stem}.npy", heat.astype(np.float32))
                 scale = float(np.quantile(heat, 0.99)) or 1.0
                 heat_norm = np.clip(heat / scale, 0, 1)
                 cmap = plt.get_cmap("magma")
-                overlay = (0.55 * original + 0.45 * cmap(heat_norm)[..., :3]).clip(0, 1)
+                overlay = (0.65 * original + 0.35 * cmap(heat_norm)[..., :3]).clip(0, 1)
                 fig, axes = plt.subplots(1, 4, figsize=(16, 4))
                 for ax, image, title in zip(axes, (original, watermarked, heat_norm, overlay),
                                              ("Original", "Watermarked", "Residual strength", "Heatmap overlay")):
                     ax.imshow(image, cmap="magma" if title == "Residual strength" else None)
                     ax.set_title(title); ax.axis("off")
                 fig.tight_layout()
-                fig.savefig(out_dir / f"{watermarked_path.stem}_heatmap.png", dpi=150)
+                fig.savefig(image_out_dir / f"{watermarked_path.stem}_heatmap.png", dpi=150)
                 plt.close(fig)
                 rows.append({"source_dir": source_dir.name, "filename": source_path.name, "watermarked_filename": watermarked_path.name,
                              "mean_residual_energy": float(np.mean(residual_energy)),
@@ -96,7 +102,7 @@ def main() -> None:
               except (OSError, ValueError) as exc:
                 missing.append(f"{source_path}: {exc}")
 
-    with (OUT / "statistics.csv").open("w", newline="", encoding="utf-8") as stream:
+    with (out_dir / "statistics.csv").open("w", newline="", encoding="utf-8") as stream:
         fields = ["source_dir", "filename", "watermarked_filename", "mean_residual_energy", "low_texture_energy", "medium_texture_energy", "high_texture_energy"]
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader(); writer.writerows(rows)
@@ -107,8 +113,8 @@ def main() -> None:
                "", "Residual heatmaps show embedding perturbation strength. They do not measure decoder sensitivity or actual watermark information density."]
     if missing:
         summary += ["", "## Missing or skipped inputs", ""] + [f"- {item}" for item in missing]
-    (OUT / "summary.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
-    print(f"Processed {len(rows)} images; see {OUT}")
+    (out_dir / "summary.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
+    print(f"Processed {len(rows)} images; see {out_dir}")
 
 
 if __name__ == "__main__":

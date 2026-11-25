@@ -1,0 +1,8 @@
+{
+  "alignment": "Existing LoT-Pass TorchvisionRAFT algorithm, flow computed from reference frame 0 to each target; target sampled at x+flow_x,y+flow_y using cv2.remap INTER_LINEAR/BORDER_REPLICATE.",
+  "decoder": "Existing gradient_saliency.compute_saliency on every RAFT-aligned frame.",
+  "display_alpha": 0.35,
+  "completed_videos": 40,
+  "per_frame_rows": 1960,
+  "raw_results_preserved": true
+}
