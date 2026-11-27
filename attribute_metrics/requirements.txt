@@ -1,0 +1,8 @@
+av==15.0.0
+numpy==1.26.4
+opencv-python==4.11.0.86
+scipy==1.15.2
+scikit-image==0.25.2
+torch==2.6.0
+torchvision==0.21.0
+lpips==0.1.4
